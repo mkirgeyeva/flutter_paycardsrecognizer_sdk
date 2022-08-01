@@ -173,7 +173,12 @@ class RecognizerVC: UIViewController, PayCardsRecognizerPlatformDelegate {
     private func updateFrames() {
         if isPortrait {
             let sideSize = view.bounds.width
-            let top = if #available(iOS 11.0, *) { view.safeAreaInsets.top } else { topLayoutGuide.length }
+             var top: CGFloat
+             if #available(iOS 11.0, *) {
+                top = view.safeAreaInsets.top
+             } else {
+                top = topLayoutGuide.length
+             }
             cameraView.frame = CGRect(x: 0.0,
                                       y: round(0.5 * max(view.bounds.height - top - sideSize, top)),
                                       width: sideSize,
